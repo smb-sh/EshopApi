@@ -1,4 +1,6 @@
+using EshopApi.Contracts;
 using EshopApi.Models;
+using EshopApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<EshopApiDbContext>(options =>
 {
     options.UseSqlServer("Data Source=.;Initial Catalog=EshopApi_DB;Integrated Security=True;TrustServerCertificate=true;");
 });
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
