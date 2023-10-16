@@ -20,13 +20,13 @@ namespace EshopApi.Controllers
         [HttpGet]
         public IActionResult GetCustomer()
         {
-            var result = new ObjectResult(_context.Customer)
+            var result = new ObjectResult(_context.Customers)
             {
                 // set status code
                 StatusCode = (int)HttpStatusCode.OK
             };
             // adding header
-            Request.HttpContext.Response.Headers.Add("X-Count", _context.Customer.Count().ToString());
+            Request.HttpContext.Response.Headers.Add("X-Count", _context.Customers.Count().ToString());
 
             return result;
         }
@@ -37,7 +37,7 @@ namespace EshopApi.Controllers
             // check user exist or not
             if (CustomerExists(id))
             {
-                var customer = await _context.Customer.SingleOrDefaultAsync(c => c.CustomerId == id);
+                var customer = await _context.Customers.SingleOrDefaultAsync(c => c.CustomerId == id);
                 return Ok(customer);
             }
             else
@@ -48,7 +48,7 @@ namespace EshopApi.Controllers
         
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(c => c.CustomerId == id);
+            return _context.Customers.Any(c => c.CustomerId == id);
         }
 
         [HttpPost]
