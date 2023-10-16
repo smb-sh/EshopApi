@@ -16,7 +16,8 @@ builder.Services.AddDbContext<EshopApiDbContext>(options =>
     options.UseSqlServer("Data Source=.;Initial Catalog=EshopApi_DB;Integrated Security=True;TrustServerCertificate=true;");
 });
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
-
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<ISalesPersonsRepository, SalesPersonsRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
